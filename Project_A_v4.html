@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project A v3 - HRV Recovery Following Teacher Burnout</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:#08132b;color:#e5e7eb}
+header{padding:50px 20px;text-align:center;background:#0f1d3a}
+.container{max-width:1150px;margin:auto;padding:24px}
+.card{background:#182744;border-radius:16px;padding:24px;margin-bottom:20px}
+h1,h2{color:white}
+.subtitle{color:#aab7cf}
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px;border:1px solid #32405e}
+th{background:#101a31}
+.highlight{color:#fbbf24;font-weight:bold}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.kpi{background:#101a31;padding:18px;border-radius:12px}
+.big{font-size:30px;color:#fbbf24;font-weight:bold}
+.note{color:#cbd5e1}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Exploratory Analysis of HRV Recovery Following Teacher Burnout</h1>
+<p class="subtitle">WHOOP Physiological Data | October 2025 – May 2026</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>Executive Summary</h2>
+<p>Following severe teacher burnout in September 2025, I began tracking physiological recovery using WHOOP wearable data. This project explores how Heart Rate Variability (HRV) changed during recovery.</p>
+<p>Monthly mean HRV increased from <span class="highlight">28.6 ms</span> in October 2025 to <span class="highlight">39.0 ms</span> in April 2026 before declining slightly to <span class="highlight">36.4 ms</span> in May 2026.</p>
+</div>
+
+<div class="card">
+<h2>Research Question</h2>
+<p><strong>How did Heart Rate Variability (HRV) change during recovery from teacher burnout between October 2025 and May 2026?</strong></p>
+</div>
+
+<div class="card">
+<h2>Why HRV?</h2>
+<p>HRV was selected because it is one of the most widely used physiological indicators of autonomic nervous system recovery and resilience.</p>
+<p>Because burnout is fundamentally linked to chronic stress and nervous system dysregulation, HRV provides a meaningful physiological signal through which recovery can be explored.</p>
+<p>HRV was also preferred over WHOOP's proprietary recovery scores because it is a direct physiological measurement rather than a platform-generated metric.</p>
+</div>
+
+<div class="card">
+<h2>Methodology</h2>
+<ul>
+<li>Data Source: WHOOP wearable device</li>
+<li>Study Period: October 2025 – May 2026</li>
+<li>Observations: 231 physiological records</li>
+<li>Metric: Heart Rate Variability (HRV)</li>
+<li>Daily HRV values grouped by month</li>
+<li>Monthly means calculated to highlight long-term trends rather than daily noise</li>
+</ul>
+</div>
+
+
+<div class="card">
+<h2>Tools Used</h2>
+<ul>
+<li>Python</li>
+<li>Pandas</li>
+<li>Google Colab</li>
+<li>HTML</li>
+<li>CSS</li>
+<li>Chart.js</li>
+<li>GitHub</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>Analytical Workflow</h2>
+<ol>
+<li>Export physiological data from WHOOP.</li>
+<li>Import the dataset into Python using Pandas.</li>
+<li>Inspect and validate the data structure.</li>
+<li>Group daily HRV observations by calendar month.</li>
+<li>Calculate monthly mean HRV values programmatically.</li>
+<li>Visualise results using HTML, CSS and Chart.js.</li>
+<li>Interpret findings in the context of burnout recovery and major life events.</li>
+<li>Publish the analysis as a GitHub portfolio project.</li>
+</ol>
+</div>
+
+<div class="card">
+<h2>Recovery Timeline</h2>
+<table>
+<tr><th>Date</th><th>Event</th></tr>
+<tr><td>Sep 2025</td><td>Severe teacher burnout</td></tr>
+<tr><td>Nov 2025</td><td>Mirena exchange</td></tr>
+<tr><td>Apr 2026</td><td>New hormonal protocol</td></tr>
+<tr><td>May 2026</td><td>Dental procedure</td></tr>
+<tr><td>May 2026</td><td>Active job search begins</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>Monthly Mean HRV</h2>
+<p class="note">Grey bars = baseline recovery period | Gold bars = April–May period</p>
+<canvas id="hrvChart"></canvas>
+</div>
+
+<div class="card">
+<h2>Key Findings</h2>
+<div class="kpis">
+<div class="kpi"><div class="big">+36%</div>Increase in monthly mean HRV from October to April.</div>
+<div class="kpi"><div class="big">39.0 ms</div>Highest monthly HRV observed in April 2026.</div>
+<div class="kpi"><div class="big">36.4 ms</div>May remained substantially above the October baseline.</div>
+</div>
+</div>
+
+<div class="card">
+<h2>Interpretation</h2>
+<p>The overall trend suggests progressive physiological recovery following severe teacher burnout. While several life events occurred during the study period, the dominant pattern is a steady improvement in HRV from October through April.</p>
+<p>The temporary reduction observed in May coincided with dental recovery and the stress of an active job search.</p>
+</div>
+
+<div class="card">
+<h2>Conclusion</h2>
+<p>This exploratory analysis suggests meaningful improvement in autonomic recovery capacity between October 2025 and May 2026. The project demonstrates how wearable physiological data can be used to investigate long-term recovery following burnout.</p>
+</div>
+
+</div>
+
+<script>
+const labels = ['Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26','May 26'];
+const values = [28.6,33.3,33.3,36.3,36.1,37.5,39.0,36.4];
+
+const annotationPlugin = {
+ id:'annotationText',
+ afterDatasetsDraw(chart){
+   const {ctx} = chart;
+   const meta = chart.getDatasetMeta(0);
+   ctx.save();
+   ctx.fillStyle='white';
+   ctx.font='12px Arial';
+
+   values.forEach((v,i)=>{
+      const x = meta.data[i].x;
+      const y = meta.data[i].y - 8;
+      ctx.fillText(v.toFixed(1), x-12, y);
+   });
+
+   ctx.fillStyle='#fbbf24';
+   ctx.fillText('Mirena Exchange', meta.data[1].x-35, meta.data[1].y-35);
+   ctx.fillText('New Protocol', meta.data[6].x-28, meta.data[6].y-35);
+   ctx.fillText('Dental + Job Search', meta.data[7].x-45, meta.data[7].y-55);
+   ctx.restore();
+ }
+};
+
+new Chart(document.getElementById('hrvChart'),{
+type:'bar',
+data:{
+labels:labels,
+datasets:[{
+data:values,
+backgroundColor:[
+'#6b7a95','#6b7a95','#6b7a95','#6b7a95',
+'#6b7a95','#6b7a95','#fbbf24','#fbbf24'
+]
+}]
+},
+options:{
+plugins:{legend:{display:false}},
+scales:{
+y:{
+min:28,
+max:40,
+ticks:{stepSize:2},
+title:{display:true,text:'HRV (ms)'}
+}
+}
+},
+plugins:[annotationPlugin]
+});
+</script>
+
+</body>
+</html>
